@@ -1,0 +1,38 @@
+// Optional: install Playwright outside this checkout and set NODE_PATH accordingly.
+// Start the repository with python3 -m http.server 8000 before running.
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || '/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+ const context=await browser.newContext({viewport:{width:390,height:844}});
+ // Deterministic browser RNG to exercise encounter, confession and the diligent portrait.
+ await context.addInitScript(()=>{Math.random=()=>.4;});
+ const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const broken=[];page.on('response',r=>{if(r.status()>=400)broken.push(r.url());});
+ await page.goto('http://localhost:8000');await page.locator('[data-action="enroll"]').click();await page.locator('[data-action="begin"]').click();
+ await page.locator('[data-key="social"]').click();assert.ok(await page.getByText('日向 ひまり',{exact:true}).count());
+ await page.locator('[data-key="date"]').click();await page.locator('[data-key="date"]').click();
+ assert.match(await page.locator('.romance h3').innerText(),/交際中/);
+ await page.locator('.partner img').waitFor();assert.ok(await page.locator('.partner img').evaluate(i=>i.complete&&i.naturalWidth>0));
+ await page.screenshot({path:'/tmp/seishun-romance.png',fullPage:true});
+ let contests=0;
+ for(let i=4;i<=20;i++){
+  await page.locator('[data-key="basic"]').click();
+  if(await page.locator('[data-action="tournament"]').count()){
+   contests++;assert.equal(await page.locator('blockquote').count(),1);assert.ok(await page.locator('.performance').innerText());
+   if(contests===1)await page.screenshot({path:'/tmp/seishun-contest.png',fullPage:true});
+   await page.locator('[data-action="tournament"]').click();
+  }
+ }
+ assert.equal(contests,6);
+ for(let i=0;i<4;i++)await page.locator('[data-action="epilogue"]').click();
+ await page.getByRole('heading',{name:'卒業おめでとう。'}).waitFor();assert.ok(await page.locator('.trophy').count()>=2);
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ await page.locator('[data-action="home"]').click();await page.reload();await page.locator('.memory summary').click();
+ assert.equal(await page.locator('.album-contest').count(),6);assert.match(await page.locator('.memory').innerText(),/ふたりの放課後/);
+ await page.screenshot({path:'/tmp/seishun-album.png',fullPage:true});
+ for(const width of [320,390,1280]){await page.setViewportSize({width,height:900});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);}
+ assert.deepEqual(errors,[]);assert.deepEqual(broken,[]);
+ console.log('PASS: full romance-to-graduation UI, six contest results, portrait, persistent expandable album, 320/390/1280px, no errors or broken assets');
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1);});

@@ -17,7 +17,7 @@ test('20 actions, six non-consuming tournaments, two promotions and four epilogu
  }
  assert.deepEqual(tournaments, CONFIG.tournaments); assert.deepEqual(promotions,[9,17]);
  for (let turn = 21; turn <= 24; turn++) { assert.equal(s.turn, turn); assert.equal(s.screen,'epilogue'); assert.equal(act(s,'basic',rng),s); s = nextEpilogue(s); }
- assert.equal(s.screen,'graduation'); assert.equal(s.summary.tournaments,6); assert.deepEqual(s.summary.trophies,['青春の卒業証書']);
+ assert.equal(s.screen,'graduation'); assert.equal(s.summary.tournaments,6); assert.ok(s.summary.trophies.includes('青春の卒業証書')); assert.equal(s.summary.results.length,6);
 });
 test('fatigue penalties apply before action; rest and disabled dates behave correctly', () => {
  const base = begin(enroll(rng,'fatigue')); base.school.environment = 50; base.aptitude.stat = 'spirit';
@@ -27,7 +27,7 @@ test('fatigue penalties apply before action; rest and disabled dates behave corr
 });
 test('encounter unlocks dates; growth has no ability diminishing returns', () => {
  const s = begin(enroll(rng,'love')); s.school.environment=50; s.aptitude.stat='spirit';
- const met = act(s,'social',createRandom(() => 0)); assert.equal(met.met,true); assert.equal(act(met,'date',rng).affection,20);
+ const met = act(s,'social',createRandom(() => 0)); assert.equal(met.met,true); assert.equal(act(met,'date',rng).affection,40);
  s.player.technique=150; assert.equal(act(s,'basic',rng).player.technique,155);
 });
 test('storage persists trophies once, tolerates malformed and unavailable storage', () => {
