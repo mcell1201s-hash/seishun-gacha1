@@ -68,9 +68,23 @@ function commands(s) {
               rest: "rest",
               social: "social",
             }[key];
+      const effectLabels = {
+        technique: "技術",
+        stamina: "体力",
+        spirit: "精神",
+        fatigue: "疲労",
+        teamwork: "連携",
+        affection: "好感",
+      };
+      const effects = Object.entries(a.gains)
+        .map(
+          ([stat, value]) =>
+            `<span class="command-effect ${stat === "fatigue" && value > 0 ? "cost" : ""}">${effectLabels[stat]}${value > 0 ? "+" : "−"}${Math.abs(value)}</span>`,
+        )
+        .join("");
       const flavor =
         key === "basic" ? club.practice : key === "team" ? club.team : "";
-      return `<button data-action="act" data-key="${key}" class="action action-${key}" ${locked ? "disabled" : ""} ${flavor ? `title="${flavor}"` : ""}>${art(sprite, "action-icon")}<strong>${a.name}</strong><small>${locked ? (s.romance.heartbroken ? "思い出を力に" : "まだ出会っていない") : a.hint}</small>${key === "team" ? art(club.key, "command-badge") : ""}${locked ? '<span class="locked-label">未解放</span>' : ""}</button>`;
+      return `<button data-action="act" data-key="${key}" class="action action-${key}" ${locked ? "disabled" : ""} ${flavor ? `title="${flavor}"` : ""}>${art(sprite, "action-icon")}<strong>${a.name}</strong><small>${locked ? (s.romance.heartbroken ? "思い出を力に" : "まだ出会っていない") : `<span class="command-effects">${effects}</span>`}</small>${key === "team" ? art(club.key, "command-badge") : ""}${locked ? '<span class="locked-label">未解放</span>' : ""}</button>`;
     })
     .join(
       "",
@@ -102,7 +116,7 @@ export function render(s, history, saveOk = true) {
   if (s.screen === "admission")
     content = `<section class="admission"><div class="card admission-heading"><p class="eyebrow">入学ガチャ / YOUR NEW STORY</p><h1>入学おめでとう。</h1><p>この場所で、青春が始まる。</p></div>${scenery(s)}<div class="card admission-card"><span class="drawn-stamp">入学決定</span><div class="school-data"><p>学校の基礎戦力 <b>${s.school.base}<small>/200</small></b></p><p>育成環境 <b>${s.school.environment}<small>/100</small></b></p><p>校内の競争水準 <b>${s.school.competition}<small>/200</small></b></p></div><p class="muted">環境が違っても、選ぶのはあなた。</p>${button("begin", "この青春を始める ▶")}</div></section>${stats(s)}`;
   if (s.screen === "training")
-    content = `${scenery(s)}${romance(s)}${stats(s)}${commands(s)}${skillPanel(s)}`;
+    content = `${scenery(s)}${romance(s)}${stats(s)}${commands(s)}`;
   if (s.screen === "tournament") {
     const t = s.pendingTournament,
       club = clubArt(s);
@@ -112,14 +126,20 @@ export function render(s, history, saveOk = true) {
     content = `${scenery(s)}${romance(s)}<section class="card moment epilogue"><p class="eyebrow">青春の余韻 / ${s.turn - 20} of 4</p>${art(s.turn === 24 ? "cap" : "heart", "big-icon")}<h1>${["次の世代へ。", "いつもの帰り道。", "春を待つ日々。", "青春に、ありがとう。"][s.turn - 21]}</h1><p>${C.epilogues[s.turn - 21]}</p>${button("epilogue", s.turn === 24 ? "卒業アルバムを開く ▶" : "次の思い出へ ▶")}</section>${stats(s)}`;
   if (s.screen === "graduation")
     content = `<section class="card graduation album"><div class="graduation-heading"><p class="eyebrow">青春アルバム / YOUR STORY, FOREVER</p>${art("cap", "big-icon")}<h1>卒業おめでとう。</h1><p>${escape(s.school.name)}<br><strong>${s.school.club.name}</strong></p></div><p class="album-intro">6回の大会と、20回の選択。<br>あなたの青春が、ここに残りました。</p><h2>集めた青春のしるし</h2>${trophies(s.trophyIds)}<h2>あなただけの結末</h2><p class="ending">${escape(s.summary.romance)}</p><details class="graduation-records"><summary>3年間の大会記録を見る</summary>${s.tournaments.map((t) => `<p class="album-contest">T${t.turn} ${escape(t.name)}<br><b>${escape(t.result)}</b> · ${escape(t.roleLabel)}<br>${escape(t.personalLabel)}</p>`).join("")}</details><p class="muted save-status">${saveOk ? "卒業結果とトロフィーをこの端末に保存しました。" : "保存できませんでした。ブラウザの保存設定を確認してください。"}</p>${button("home", "青春アルバムへ ▶")}</section>${stats(s)}${skillPanel(s)}`;
-  return (
-    progress(s) +
-    content +
-    (s.screen !== "admission"
-      ? `<section class="card diary"><h2>青春日誌 <span>DIARY</span></h2><ol aria-live="polite">${s.logs
+  const diary =
+    s.screen !== "admission"
+      ? `<section class="card diary"><h2>青春日誌 <span>DIARY</span></h2><ol>${s.logs
           .slice(0, 8)
           .map((log) => `<li>${escape(log)}</li>`)
           .join("")}</ol></section>`
-      : "")
-  );
+      : "";
+  if (s.screen === "training")
+    return `<div class="training-shell">${progress(s)}${content}<button class="training-info-button" data-action="info">日誌・スキル・行動の説明 ▤</button></div><dialog id="training-info" class="training-info"><button class="primary" data-action="close-info">閉じて育成に戻る</button><h2>青春ノート</h2>${skillPanel(s)}${diary}<h3>行動の基本効果</h3><p class="muted">練習成長は環境・疲労・適性で変化します。実際の増減は行動後に表示します。大会後と進級時は自然回復します。</p>${Object.values(
+      C.actions,
+    )
+      .map((a) => `<p><b>${a.name}</b><br>${a.hint}</p>`)
+      .join(
+        "",
+      )}<h3>放課後のつながり</h3><p>${s.met ? `${ROMANCE.types[s.romance.type].name}・${relationshipStage(s)}。${ROMANCE.types[s.romance.type].description}` : "交流や季節の行事で出会いがあります。恋愛をしなくても大会で活躍できます。"}</p><p>${s.romance.dating ? `交際後のデート${s.romance.datesAfterDating}回・思い出${s.romance.memories}個。デートしなくても交際は続きます。` : "好感度60以上のデートで告白。追加のターンは使いません。"}</p></dialog>`;
+  return progress(s) + content + diary;
 }

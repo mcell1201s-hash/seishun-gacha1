@@ -1229,3 +1229,447 @@ footer small {
     }
   }
 }
+
+/* Training alone gets a viewport budget. Other screens keep natural scrolling. */
+body[data-screen="training"] .page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+body[data-screen="training"] header {
+  height: 32px;
+}
+body[data-screen="training"] header .brand {
+  font-size: 20px;
+}
+body[data-screen="training"] header .badge {
+  font-size: 8px;
+  padding: 2px 5px;
+}
+body[data-screen="training"] footer {
+  display: none;
+}
+.training-shell {
+  height: calc(
+    100vh - 32px - env(safe-area-inset-top, 0px) -
+      env(safe-area-inset-bottom, 0px)
+  );
+  height: calc(
+    100dvh - 32px - env(safe-area-inset-top, 0px) -
+      env(safe-area-inset-bottom, 0px)
+  );
+  min-height: 530px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.8dvh, 7px);
+  padding: 5px 0;
+}
+.training-shell > * {
+  min-width: 0;
+  flex-shrink: 0;
+}
+.training-shell .turn-panel {
+  padding: 0 3px;
+  height: 39px;
+}
+.training-shell .progress-head {
+  height: 16px;
+  font-size: 10px;
+}
+.training-shell .progress-head strong {
+  font-size: 16px;
+}
+.training-shell .progress-head small {
+  font-size: 11px;
+}
+.training-shell .runner-track {
+  margin-top: 11px;
+}
+.training-shell .runner {
+  bottom: 0;
+}
+.training-shell .runner img {
+  width: 18px;
+  height: 24px;
+}
+.training-shell .runner-track progress {
+  height: 7px;
+}
+.training-shell .runner-lane {
+  height: 7px;
+}
+.training-shell .year-mark {
+  height: 7px;
+}
+.training-shell .milestone {
+  top: 9px;
+  width: 3px;
+  height: 3px;
+}
+.training-shell .progress-legend {
+  display: none;
+}
+.training-shell .school-scene {
+  flex: 1 1 140px;
+  height: auto;
+  min-height: 92px;
+  max-height: 148px;
+  margin: 0;
+}
+.training-shell .season-chip {
+  top: 5px;
+  left: 6px;
+  padding: 2px 6px;
+  border-width: 1px;
+  gap: 7px;
+  font-size: 11px;
+}
+.training-shell .season-chip > span {
+  padding: 1px 6px;
+}
+.training-shell .school-overlay {
+  bottom: 5px;
+  left: 6px;
+  right: 6px;
+  padding: 4px 8px;
+  gap: 9px;
+  border-width: 1px;
+}
+.training-shell .school-overlay h1 {
+  font-size: clamp(21px, 5.5vw, 25px);
+}
+.training-shell .school-overlay .club-icon {
+  width: 36px;
+  height: 36px;
+}
+.training-shell .school-name {
+  font-size: 10px;
+}
+.training-shell .scene-caption {
+  display: none;
+}
+.training-shell .romance {
+  margin: 0;
+  padding: 3px 7px;
+  box-shadow: 0 1px 0 #dbb9b5;
+}
+.training-shell .partner {
+  gap: 7px;
+}
+.training-shell .partner .face {
+  width: 28px;
+  height: 28px;
+}
+.training-shell .partner strong {
+  font-size: 12px;
+}
+.training-shell .partner small,
+.training-shell .relationship-notes {
+  display: none;
+}
+.training-shell .relationship-stage {
+  max-width: none;
+  padding: 2px 5px;
+  font-size: 10px;
+}
+.training-shell .status-card {
+  margin: 0;
+  padding: 6px 9px;
+  box-shadow: 0 2px 0 var(--shadow);
+}
+.training-shell .panel-heading {
+  margin-bottom: 4px;
+  height: 12px;
+}
+.training-shell .panel-heading h2 {
+  font-size: 10px;
+}
+.training-shell .panel-heading > span {
+  font-size: 9px;
+}
+.training-shell .stats {
+  gap: 5px 15px;
+}
+.training-shell .stat > div {
+  margin-bottom: 2px;
+}
+.training-shell .stat strong {
+  font-size: 16px;
+}
+.training-shell .stat span {
+  font-size: 11px;
+}
+.training-shell .stat meter {
+  height: 4px;
+}
+.training-shell .teamline {
+  margin-top: 6px;
+  padding-top: 5px;
+  font-size: 10px;
+}
+.training-shell .teamline b {
+  font-size: 13px;
+}
+.training-shell .warning {
+  font-size: 10px;
+  line-height: 1.5;
+  padding: 3px 5px;
+  margin-top: 4px;
+}
+.training-shell .command-panel {
+  margin-top: auto;
+}
+.training-shell .section-title {
+  margin: 0 0 5px;
+  min-height: 19px;
+}
+.training-shell .section-title h2 {
+  font-size: 13px;
+}
+.training-shell .section-title span {
+  font-size: 10px;
+}
+.training-shell .actions {
+  gap: 6px;
+}
+.training-shell .action {
+  min-height: 84px;
+  padding: 4px 3px;
+  gap: 2px;
+}
+.training-shell .action .action-icon {
+  width: 28px;
+  height: 28px;
+}
+.training-shell .action strong {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.training-shell .action small {
+  width: 100%;
+  font-size: 10px;
+  line-height: 1.35;
+}
+.command-effects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 4px;
+  row-gap: 0;
+}
+.command-effect {
+  white-space: nowrap;
+  font-size: 10px;
+}
+.command-effect.cost {
+  color: #9a4136;
+}
+.training-shell .command-badge {
+  width: 13px;
+  height: 13px;
+  top: 4px;
+  right: 4px;
+}
+.training-shell .locked-label {
+  font-size: 8px;
+  top: 2px;
+  right: 2px;
+}
+.training-shell .schedule {
+  display: none;
+}
+.training-info-button {
+  min-height: 32px;
+  width: 100%;
+  border: 1px solid #82928b;
+  border-radius: 5px;
+  background: #eee9d6;
+  color: var(--navy);
+  font-size: 11px;
+  padding: 5px 8px;
+}
+.training-info {
+  width: min(94vw, 510px);
+  max-height: 88vh;
+  max-height: 88dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  border: 2px solid var(--navy);
+  border-radius: 10px;
+  background: var(--cream);
+  color: var(--navy);
+}
+.training-info::backdrop {
+  background: #17263c99;
+}
+.training-info > h2 {
+  margin-top: 18px;
+}
+.training-info > .primary {
+  position: sticky;
+  top: 0;
+  min-height: 44px;
+  z-index: 1;
+}
+@media (min-height: 740px) {
+  .training-shell .action {
+    min-height: 99px;
+    padding: 7px 5px;
+  }
+  .training-shell .action .action-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .training-shell .action small,
+  .command-effect {
+    font-size: 11px;
+  }
+  .training-shell .training-info-button {
+    min-height: 44px;
+  }
+}
+@media (max-height: 660px) {
+  .training-shell {
+    gap: 4px;
+  }
+  .training-shell .school-scene {
+    max-height: 127px;
+  }
+  .training-shell .panel-heading {
+    display: none;
+  }
+}
+/* Tiny webviews and zoomed text retain readable controls and natural vertical scroll. */
+@media (max-height: 559px) {
+  .training-shell {
+    height: auto;
+    min-height: 530px;
+  }
+  .training-shell .school-scene {
+    flex: 0 0 100px;
+  }
+}
+.showing-feedback {
+  overflow: hidden;
+}
+.turn-feedback {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: max(12px, env(safe-area-inset-top, 0px)) 14px
+    max(12px, env(safe-area-inset-bottom, 0px));
+  background: #2939543d;
+  overscroll-behavior: contain;
+}
+.feedback-panel {
+  width: min(100%, 410px);
+  max-height: 100%;
+  overflow-y: auto;
+  border: 2px solid var(--navy);
+  border-radius: 10px;
+  box-shadow: 0 4px 0 #29395480;
+  padding: 15px;
+  background: #fffbeef7;
+  text-align: center;
+}
+.feedback-panel .eyebrow {
+  margin: 0 0 9px;
+}
+.feedback-panel h2 {
+  font-size: 20px;
+}
+.feedback-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+}
+.action-description {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+.result-deltas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 12px 0;
+}
+.delta {
+  font-size: 12px;
+  padding: 7px 4px;
+  background: #e3eee3;
+  border: 1px solid #a0b7a0;
+  border-radius: 5px;
+  color: #2c6549;
+}
+.delta b {
+  font-family: ui-monospace, monospace;
+  font-size: 16px;
+}
+.delta.cost {
+  background: #f7e4dc;
+  color: #963f38;
+  border-color: #d4a295;
+}
+.delta.neutral {
+  background: #ecebdd;
+  color: #677274;
+  border-color: #c6c8b8;
+}
+.delta small {
+  font-size: 9px;
+  display: block;
+}
+.important-event {
+  font-size: 14px;
+  color: #915270;
+  border-block: 1px dashed #cf9f9f;
+  padding: 9px 0;
+  margin: 10px 0;
+}
+.feedback-messages p {
+  font-size: 12px;
+  text-align: left;
+  line-height: 1.75;
+  margin: 8px 0;
+}
+.feedback-next {
+  min-height: 44px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--navy);
+  border-radius: 6px;
+  color: var(--navy);
+  background: #e8ecd8;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.auto-hint {
+  display: block;
+  font-size: 10px;
+  color: #718075;
+  margin-top: 7px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .show-action .feedback-icon {
+    animation: action-beat 0.55s steps(2, end) 1;
+  }
+  @keyframes action-beat {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+}
+.important-event .event-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 6px;
+}
