@@ -4,7 +4,7 @@ export const CONFIG = {
   recovery: { tournament: 15, year: 25 },
   fatigue: { medium: 60, high: 80, mediumMultiplier: .8, highMultiplier: .6 },
   injury: { normal: .02, medium: .08, high: .18, fatigue: 8, spirit: -3 },
-  events: { positive: .18, negative: .12, encounter: .35 },
+  events: { positive: .18, negative: .12 },
   environment: { minimumMultiplier: .8, rangeMultiplier: .4 },
   actions: {
     basic: { name: '基礎練習', icon: '🏃', hint: '技術 +5 / 体力 +2 / 疲労 +8', gains: { technique: 5, stamina: 2, fatigue: 8 }, practice: true },
@@ -22,3 +22,53 @@ export const CONFIG = {
   aptitudes: [ { name: '技術への好奇心', stat: 'technique', multiplier: 1.1 }, { name: '体づくりが得意', stat: 'stamina', multiplier: 1.1 }, { name: '折れない心', stat: 'spirit', multiplier: 1.1 } ],
   epilogues: ['最後の大会が終わり、部活を引退した。後輩たちに、あなたの経験を手渡そう。', '放課後の教室。何気ない会話も、もうすぐ思い出になる。', '卒業式の予行。あの春から、ずいぶん遠くまで来た。', '卒業の日。選べなかった部活で、あなただけの青春を選んだ。']
 };
+
+// All contest weights, thresholds, relationship probabilities and skill effects live here.
+export const CONTEST = {
+  abilityWeights: { technique: .5, stamina: .25, spirit: .25 },
+  selectionNoise: 12, regularMargin: 5, substituteMargin: -25,
+  roles: { regular: { label: 'レギュラー', exposure: 1 }, substitute: { label: '途中出場', exposure: .6 }, reserve: { label: '控え・出場なし', exposure: 0 } },
+  condition: { fatiguePenalty: .35, minimum: .6 },
+  personalNoise: 24, personalThresholds: { excellent: 110, good: 65 },
+  teamWeights: { base: .72, teamwork: .45, contribution: .28, condition: 15 },
+  reserveContribution: 8, teamNoise: 32,
+  ranks: [ { min: 175, label: '優勝', record: '4勝・無敗' }, { min: 145, label: '準優勝', record: '3勝・1敗' }, { min: 112, label: 'ベスト4', record: '2勝・1敗' }, { min: 80, label: 'ベスト8', record: '1勝・1敗' }, { min: -Infinity, label: '初戦敗退', record: '0勝・1敗' } ],
+  critique: { technique: 65, stamina: 55, spirit: 55, teamwork: 45, fatigue: 65 },
+  labels: {
+    '野球部': { ranks: ['優勝', '準優勝', 'ベスト4', 'ベスト8', '初戦敗退'], excellent: '攻守で大活躍', good: '堅実なプレー', quiet: '持ち味を出しきれず', scenes: ['決勝の最後のアウト。仲間が一斉に駆け寄ってきた。', 'あと一歩届かなかった。それでも最後まで白球を追った。', '接戦を勝ち抜いた先で、次の課題が見えてきた。', '一勝をつかんだ声が、グラウンドに残っている。', '短い夏。それでもスコアに残らない努力があった。'] },
+    '吹奏楽部': { ranks: ['最優秀賞', '金賞', '銀賞', '銅賞', '奨励賞'], excellent: '響きで会場を魅了', good: '安定した演奏', quiet: '音色に少し迷い', scenes: ['最後の音が消えても、拍手は鳴り止まなかった。', '磨き合ったハーモニーが、高く評価された。', '緊張のステージで、自分たちの響きを届けた。', 'そろわなかった一音を、次の練習につなげよう。', '舞台から見た景色を、誰も忘れないだろう。'] },
+    '美術部': { ranks: ['最優秀校賞', '優秀校賞', '入賞', '佳作', '選外'], excellent: '表現力が高く評価', good: '丁寧な作品を出展', quiet: '表現に課題が残る', scenes: ['作品群の前に人だかり。みんなの表現が届いた。', '挑戦を重ねた色使いが、審査員の目を引いた。', '違う個性が並び、一つの展示として認められた。', '講評を聞き、次に描きたいものが浮かんできた。', '賞には届かなくても、この作品は今だけの記録だ。'] }
+  }
+};
+export const ROMANCE = {
+  encounter: .5, seasonalEncounter: .08, seasons: [3, 7, 11, 15, 19], initialAffection: 20,
+  intimate: 40, confessionAt: 60, confessionChance: .85, rejectionSpirit: -6,
+  dateRecoveryChance: .5, dateRecovery: 12, dateMemoryChance: .35, endingDates: 2, endingAffection: 80,
+  heartbreakPracticeMinimum: 2, awakeningChance: .12, awakeningGains: { technique: 10, spirit: 12 },
+  types: {
+    support: { name: '春野 こはる', label: '応援タイプ', icon: '🌷', description: 'あなたのペースを大切にしてくれる、穏やかな同級生。', bonus: { spirit: 8, fatigue: -10 }, recoveryChance: .25, recovery: 8, tournamentSpirit: 12 },
+    diligent: { name: '日向 ひまり', label: '努力家タイプ', icon: '🌼', description: '金髪のショートボブに柔らかな笑顔。放課後もこつこつ努力を重ねる同級生。', portrait: 'assets/himari.png', bonus: { technique: 8, spirit: 3 }, practiceChance: .3, practiceTechnique: 3 },
+    free: { name: '風見 なぎ', label: '自由奔放タイプ', icon: '🪁', description: '気まぐれな寄り道で、いつもの景色を変えてくれる同級生。', bonus: { spirit: 12 }, positiveChance: .2, negativeChance: .1, positiveSpirit: 5, negativeSpirit: -3, awakeningChance: .1 }
+  }
+};
+export const SKILLS = {
+  effort: { name: '努力家', description: '練習時の技術成長 +1', actions: ['basic'], chance: .14, minimum: 2, technique: 1 },
+  focus: { name: '集中力', description: '大会の個人評価を後押し', actions: ['intensive'], chance: .16, minimum: 2, personal: 8 },
+  clutch: { name: '勝負強さ', description: '大会の精神評価を後押し', actions: ['intensive','team'], chance: .08, minimum: 3, spirit: 10 },
+  iron: { name: '鉄人', description: '練習の疲労増加を軽減、ケガの確率半減', actions: ['basic'], chance: .1, minimum: 3, fatigueMultiplier: .8, injuryMultiplier: .5 },
+  mood: { name: 'ムードメーカー', description: '大会の連携評価を後押し', actions: ['team'], chance: .16, minimum: 2, teamwork: 8 }
+};
+export const TROPHIES = [
+  { id: 'graduate', category: '成長', name: '青春の卒業証書', description: '3年間を最後まで過ごす' },
+  { id: 'champion', category: '大会', name: '頂点の景色', description: 'チームが優勝相当の成績を収める' },
+  { id: 'reserveChampion', category: '大会', name: 'ベンチからの栄冠', description: '控えの大会でチームが優勝相当' },
+  { id: 'star', category: '大会', name: '今日の主役', description: '個人成績で大活躍する' },
+  { id: 'growth', category: '成長', name: '積み重ねの力', description: 'いずれかの能力を120以上にする', threshold: 120 },
+  { id: 'skills', category: '成長', name: '自分だけの武器', description: '永続スキルを2つ以上獲得', threshold: 2 },
+  { id: 'couple', category: '恋愛', name: 'ふたりの放課後', description: '交際が成立する' },
+  { id: 'ending', category: '恋愛', name: '春の約束', description: '交際後の思い出を重ね、特別な卒業を迎える' },
+  { id: 'underdog', category: '逆境', name: '小さな学校の大きな一歩', description: '基礎戦力60以下でベスト8相当以上', baseMax: 60, rankMax: 3 },
+  { id: 'heartbreak', category: '逆境', name: '涙も青春', description: '告白が実らない経験をする' },
+  { id: 'awakened', category: '隠し', name: 'あの日を越えて', description: '失恋後の練習で覚醒する' },
+  { id: 'freeAwakened', category: '隠し', name: '知らない自分', description: '自由奔放な相手との特別なデートで覚醒する' }
+];
