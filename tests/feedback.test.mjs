@@ -44,7 +44,7 @@ function fakeClock() {
     },
   };
 }
-test("normal action shows 550ms action + 1050ms result then advances exactly once", () => {
+test("normal action shows 300ms action + 1500ms result then advances exactly once", () => {
   const frames = [],
     clock = fakeClock(),
     flow = createTurnFlow((s, f) => frames.push([s, f]), clock);
@@ -96,7 +96,7 @@ test("important results never auto-dismiss, including promotion-only results", (
   flow.tap();
   clock.advance(300);
   const before = fresh();
-  before.turn = 8;
+  before.turn = 9;
   before.screen = "tournament";
   before.pendingTournament = { turn: 8, result: "入賞", personalLabel: "活躍" };
   const after = finishTournament(before);
@@ -108,7 +108,7 @@ test("important results never auto-dismiss, including promotion-only results", (
   assert.equal(flow.busy, true);
   flow.finish();
   assert.equal(clock.pending, 0);
-  assert.equal(frames.at(-1)[0].turn, 9);
+  assert.equal(frames.at(-1)[0].turn, 10);
 });
 test("critical event classifier covers skills, injury, encounter, confession, rejection and both awakenings", () => {
   const before = fresh(),

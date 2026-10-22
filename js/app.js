@@ -1,12 +1,5 @@
 import { createRandom } from "./random.js";
-import {
-  enroll,
-  begin,
-  act,
-  finishTournament,
-  nextEpilogue,
-  yearFor,
-} from "./game.js";
+import { enroll, begin, act, finishTournament, yearFor } from "./game.js";
 import { loadHistory, saveResult } from "./state.js";
 import { render } from "./view.js";
 import {
@@ -72,6 +65,7 @@ root.addEventListener("click", (event) => {
     const before = state,
       after = finishTournament(state);
     state = after;
+    if (state.screen === "graduation") saveOk = saveResult(state.summary);
     if (yearFor(after.turn) > yearFor(before.turn)) {
       flow.start(before, after, promotionFeedback(before, after), true);
       return;
@@ -79,10 +73,6 @@ root.addEventListener("click", (event) => {
   }
   if (action === "enroll") state = enroll(rng);
   if (action === "begin") state = begin(state);
-  if (action === "epilogue") {
-    state = nextEpilogue(state);
-    if (state.screen === "graduation") saveOk = saveResult(state.summary);
-  }
   if (action === "home") state = null;
   draw();
   window.scrollTo({ top: 0, behavior: "instant" });

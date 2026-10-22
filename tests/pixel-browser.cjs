@@ -58,14 +58,14 @@ const assert = require("node:assert/strict");
   const seasons = {
     1: "spring",
     3: "summer",
-    5: "autumn",
-    7: "winter",
-    9: "spring",
-    17: "spring",
-    20: "summer",
-    21: "autumn",
-    22: "winter",
-    24: "spring",
+    5: "summer",
+    6: "autumn",
+    8: "winter",
+    10: "spring",
+    14: "summer",
+    17: "winter",
+    20: "spring",
+    23: "summer",
   };
   let checks = 0;
   for (const width of [320, 390, 540, 1280]) {
@@ -148,7 +148,7 @@ const assert = require("node:assert/strict");
     fullPage: true,
   });
   let previous = -Infinity;
-  for (const turn of [1, 9, 17, 24]) {
+  for (const turn of [1, 10, 19, 23]) {
     await paint({ turn });
     const x = await page
       .locator(".runner")
@@ -157,7 +157,7 @@ const assert = require("node:assert/strict");
     previous = x;
   }
   for (const club of [0, 1, 2]) {
-    await paint({ club, turn: 4, screen: "tournament" });
+    await paint({ club, turn: 5, screen: "tournament" });
     assert.equal(await page.locator(".coach-face").count(), 1);
     assert.equal(
       await page.evaluate(

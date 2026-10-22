@@ -2,7 +2,7 @@ import { CONFIG, SKILLS } from "./config.js";
 import { yearFor } from "./game.js";
 import { clubArt, art } from "./presentation.js";
 
-export const TIMING = { action: 550, result: 1050, cooldown: 280 };
+export const TIMING = { action: 300, result: 1500, cooldown: 280 };
 export const DESCRIPTIONS = {
   野球部: {
     basic: [

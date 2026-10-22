@@ -77,6 +77,19 @@ const assert = require("node:assert/strict");
           await page.locator(".technique strong").innerText(),
           /200/,
         );
+        const gap = await page.evaluate(
+          () =>
+            document.querySelector(".command-panel").getBoundingClientRect()
+              .top -
+            document.querySelector(".status-card").getBoundingClientRect()
+              .bottom,
+        );
+        assert.ok(gap >= 8 && gap <= 16, `status-command gap: ${gap}`);
+        assert.match(await page.locator(".club-power").innerText(), /総合力/);
+        assert.match(
+          await page.locator(".training-goal").innerText(),
+          /見込み/,
+        );
         checks++;
       }
     await page.screenshot({
