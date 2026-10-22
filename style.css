@@ -1656,7 +1656,7 @@ body[data-screen="training"] footer {
 }
 @media (prefers-reduced-motion: no-preference) {
   .show-action .feedback-icon {
-    animation: action-beat 0.55s steps(2, end) 1;
+    animation: action-beat 0.3s steps(2, end) 1;
   }
   @keyframes action-beat {
     0%,
@@ -1672,4 +1672,159 @@ body[data-screen="training"] footer {
   width: 22px;
   height: 22px;
   margin-right: 6px;
+}
+
+/* Stable vertical flow: free viewport space belongs below the controls, never between them. */
+.training-shell {
+  height: auto;
+  min-height: calc(
+    100svh - 32px - env(safe-area-inset-top, 0px) -
+      env(safe-area-inset-bottom, 0px)
+  );
+  gap: 5px;
+}
+.training-shell .school-scene {
+  flex: 0 0 auto;
+  height: clamp(
+    92px,
+    calc(
+      100svh - 540px - env(safe-area-inset-top, 0px) -
+        env(safe-area-inset-bottom, 0px)
+    ),
+    148px
+  );
+  min-height: 92px;
+  max-height: none;
+}
+.training-shell .command-panel {
+  margin-top: 6px;
+}
+.training-shell .panel-heading {
+  display: none;
+}
+.training-shell .action {
+  min-height: 78px;
+  padding: 4px 3px;
+  gap: 1px;
+}
+.training-shell .action .action-icon {
+  width: 24px;
+  height: 24px;
+}
+.training-shell .action strong {
+  line-height: 1.3;
+}
+.training-shell .action small,
+.training-shell .command-effect {
+  font-size: 10px;
+}
+.training-shell .training-info-button {
+  min-height: 32px;
+}
+.club-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+}
+.club-power {
+  margin: 0;
+  font-size: 10px;
+  white-space: nowrap;
+  color: #47685b;
+}
+.club-power b {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+.training-goal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 6px;
+  border-top: 1px dashed #b7c2a9;
+  padding-top: 5px;
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.training-goal b {
+  font-size: 10px;
+  color: #496c64;
+}
+.training-goal small {
+  width: 100%;
+  font-size: 10px;
+  color: #576b67;
+}
+.final-banner {
+  background: #293954;
+  color: #ffe0a3;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 12px 6px;
+  margin: 0;
+}
+.final-tournament {
+  border-color: #a77a42;
+  box-shadow: 0 3px 0 #cfad78;
+}
+.retrospective {
+  text-align: left;
+  border-block: 2px dashed #b9ab91;
+  padding: 15px 0;
+  margin: 18px 0;
+}
+.retrospective ol {
+  padding-left: 20px;
+  font-size: 12px;
+  line-height: 1.95;
+}
+.retrospective li {
+  margin: 8px 0;
+}
+.growth-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  background: #fff9e9;
+}
+.growth-table caption {
+  text-align: left;
+  padding-bottom: 8px;
+  font-weight: 700;
+}
+.growth-table th,
+.growth-table td {
+  padding: 7px;
+  border: 1px solid #c9baa0;
+  text-align: center;
+}
+.growth-table thead {
+  background: #ece4ce;
+}
+@media (max-height: 559px) {
+  .training-shell {
+    min-height: 0;
+  }
+  .training-shell .school-scene {
+    height: 92px;
+    flex: 0 0 auto;
+  }
+}
+.training-shell {
+  gap: 4px;
+}
+.training-goal {
+  gap: 1px 6px;
+  margin-top: 3px;
+  padding-top: 3px;
+  line-height: 1.25;
+}
+@media (max-height: 600px) {
+  /* Keep the role and countdown visible; the full ability goal remains in the notebook. */
+  .training-shell .training-goal small {
+    display: none;
+  }
 }

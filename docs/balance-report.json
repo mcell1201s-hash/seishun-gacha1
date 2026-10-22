@@ -1,0 +1,447 @@
+{
+  "referenceCommit": "760428c",
+  "rankOrder": [
+    "優勝相当",
+    "準優勝相当",
+    "ベスト4相当",
+    "ベスト8相当",
+    "初戦敗退相当"
+  ],
+  "fixed": [
+    {
+      "base": 30,
+      "teamwork": 45,
+      "power": 42,
+      "tier": "挑戦者",
+      "contests": 60000,
+      "oldCounts": [
+        0,
+        0,
+        60,
+        24510,
+        35430
+      ],
+      "newCounts": [
+        0,
+        0,
+        81,
+        24642,
+        35277
+      ],
+      "oldSameSixRate": 0.0442,
+      "newSameSixRate": 0.0431,
+      "changedRankRate": 0.0029,
+      "maxScoreDelta": 0.15
+    },
+    {
+      "base": 100,
+      "teamwork": 45,
+      "power": 92,
+      "tier": "中堅",
+      "contests": 60000,
+      "oldCounts": [
+        0,
+        9099,
+        30422,
+        20479,
+        0
+      ],
+      "newCounts": [
+        0,
+        8871,
+        30443,
+        20686,
+        0
+      ],
+      "oldSameSixRate": 0.0191,
+      "newSameSixRate": 0.0193,
+      "changedRankRate": 0.00725,
+      "maxScoreDelta": 0.25
+    },
+    {
+      "base": 171,
+      "teamwork": 45,
+      "power": 143,
+      "tier": "有力",
+      "contests": 60000,
+      "oldCounts": [
+        16279,
+        27665,
+        16056,
+        0,
+        0
+      ],
+      "newCounts": [
+        15392,
+        27747,
+        16861,
+        0,
+        0
+      ],
+      "oldSameSixRate": 0.0094,
+      "newSameSixRate": 0.0093,
+      "changedRankRate": 0.0282,
+      "maxScoreDelta": 0.37
+    },
+    {
+      "base": 180,
+      "teamwork": 45,
+      "power": 150,
+      "tier": "有力",
+      "contests": 60000,
+      "oldCounts": [
+        21231,
+        27700,
+        11069,
+        0,
+        0
+      ],
+      "newCounts": [
+        21231,
+        27700,
+        11069,
+        0,
+        0
+      ],
+      "oldSameSixRate": 0.01,
+      "newSameSixRate": 0.01,
+      "changedRankRate": 0,
+      "maxScoreDelta": 0.15
+    }
+  ],
+  "tiers": [
+    {
+      "base": 20,
+      "teamwork": 20,
+      "power": 23,
+      "tier": "弱小",
+      "counts": [
+        0,
+        0,
+        0,
+        1403,
+        10597
+      ],
+      "contests": 12000
+    },
+    {
+      "base": 110,
+      "teamwork": 40,
+      "power": 97,
+      "tier": "中堅",
+      "counts": [
+        0,
+        2299,
+        6152,
+        3549,
+        0
+      ],
+      "contests": 12000
+    },
+    {
+      "base": 190,
+      "teamwork": 60,
+      "power": 164,
+      "tier": "強豪",
+      "counts": [
+        6816,
+        5184,
+        0,
+        0,
+        0
+      ],
+      "contests": 12000
+    }
+  ],
+  "careers": [
+    {
+      "club": "野球部",
+      "base": 30,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        0,
+        0,
+        25,
+        235,
+        340
+      ],
+      "sameSix": 4,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "野球部",
+      "base": 30,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        0,
+        0,
+        19,
+        226,
+        355
+      ],
+      "sameSix": 5,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "野球部",
+      "base": 100,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        1,
+        126,
+        294,
+        171,
+        8
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "野球部",
+      "base": 100,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        0,
+        101,
+        306,
+        180,
+        13
+      ],
+      "sameSix": 0,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "野球部",
+      "base": 180,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        260,
+        257,
+        83,
+        0,
+        0
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "野球部",
+      "base": 180,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        247,
+        269,
+        84,
+        0,
+        0
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "吹奏楽部",
+      "base": 30,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        0,
+        0,
+        25,
+        235,
+        340
+      ],
+      "sameSix": 4,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "吹奏楽部",
+      "base": 30,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        0,
+        0,
+        19,
+        226,
+        355
+      ],
+      "sameSix": 5,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "吹奏楽部",
+      "base": 100,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        1,
+        126,
+        294,
+        171,
+        8
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "吹奏楽部",
+      "base": 100,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        0,
+        101,
+        306,
+        180,
+        13
+      ],
+      "sameSix": 0,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "吹奏楽部",
+      "base": 180,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        260,
+        257,
+        83,
+        0,
+        0
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "吹奏楽部",
+      "base": 180,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        247,
+        269,
+        84,
+        0,
+        0
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "美術部",
+      "base": 30,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        0,
+        0,
+        25,
+        235,
+        340
+      ],
+      "sameSix": 4,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "美術部",
+      "base": 30,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        0,
+        0,
+        19,
+        226,
+        355
+      ],
+      "sameSix": 5,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "美術部",
+      "base": 100,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        1,
+        126,
+        294,
+        171,
+        8
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "美術部",
+      "base": 100,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        0,
+        101,
+        306,
+        180,
+        13
+      ],
+      "sameSix": 0,
+      "sameCoach": 0,
+      "dating": 83
+    },
+    {
+      "club": "美術部",
+      "base": 180,
+      "love": false,
+      "runs": 100,
+      "counts": [
+        260,
+        257,
+        83,
+        0,
+        0
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 0
+    },
+    {
+      "club": "美術部",
+      "base": 180,
+      "love": true,
+      "runs": 100,
+      "counts": [
+        247,
+        269,
+        84,
+        0,
+        0
+      ],
+      "sameSix": 1,
+      "sameCoach": 0,
+      "dating": 83
+    }
+  ],
+  "completedCareers": 1800
+}

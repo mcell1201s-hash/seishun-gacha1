@@ -32,7 +32,7 @@ const assert = require("node:assert/strict");
       .evaluate((el) => getComputedStyle(el).animationName),
     "none",
   );
-  await page.clock.runFor(549);
+  await page.clock.runFor(299);
   assert.equal(await page.locator(".show-action").count(), 1);
   await page.clock.runFor(1);
   assert.equal(await page.locator(".show-result").count(), 1);
@@ -42,7 +42,7 @@ const assert = require("node:assert/strict");
     path: "/tmp/seishun-action-result.png",
     fullPage: true,
   });
-  await page.clock.runFor(1049);
+  await page.clock.runFor(1499);
   assert.equal(await page.locator(".turn-feedback").count(), 1);
   await page.clock.runFor(1);
   assert.equal(await page.locator(".turn-feedback").count(), 0);
@@ -70,20 +70,21 @@ const assert = require("node:assert/strict");
   await tap(".feedback-next");
   assert.equal(await turn(), "4");
   await page.clock.runFor(300);
-  // The action result leads to the existing tournament screen, which also waits for input.
   await tap('[data-key="date"]');
-  await page.clock.runFor(1600);
-  assert.equal(await page.locator('[data-action="tournament"]').count(), 1);
-  await page.clock.runFor(5000);
-  assert.equal(await page.locator('[data-action="tournament"]').count(), 1);
-  await page.clock.runFor(300);
-  await tap('[data-action="tournament"]');
+  await page.clock.runFor(1800);
   assert.equal(await turn(), "5");
+  await page.clock.runFor(300);
+  // Confession and the first tournament share T5, each requiring acknowledgement.
   await tap('[data-key="date"]');
   await page.clock.runFor(10000);
   assert.match(await page.locator(".important-event").innerText(), /交際/);
   await tap(".feedback-next");
   await page.clock.runFor(300);
+  assert.equal(await page.locator('[data-action="tournament"]').count(), 1);
+  await page.clock.runFor(5000);
+  assert.equal(await page.locator('[data-action="tournament"]').count(), 1);
+  await tap('[data-action="tournament"]');
+  assert.equal(await turn(), "6");
   assert.match(await page.locator(".relationship-stage").innerText(), /交際中/);
   // Notebook is reachable and closes without taking an action.
   await tap('[data-action="info"]');
@@ -121,7 +122,7 @@ const assert = require("node:assert/strict");
   await nativePage.close();
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: 1.6s auto progression, important-event holds, tournament manual advance, real deltas, rapid taps, skip cooldown, stale timers, notebook, reduced motion and mid-animation reload",
+    "PASS: 1.8s auto progression, important-event holds, tournament manual advance, real deltas, rapid taps, skip cooldown, stale timers, notebook, reduced motion and mid-animation reload",
   );
   await browser.close();
 })().catch((e) => {

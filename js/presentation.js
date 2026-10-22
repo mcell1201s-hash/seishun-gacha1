@@ -1,3 +1,4 @@
+import { calendarFor } from "./calendar.js";
 // Presentation-only manifest. Replace asset paths here without touching game rules.
 export const PIXEL_ROOT = "assets/pixel/";
 export const CLUB_ART = {
@@ -26,14 +27,7 @@ export const SEASONS = {
   autumn: { label: "秋", caption: "少しずつ、実るもの。", color: "gold" },
   winter: { label: "冬", caption: "次の春へ、力をためて。", color: "navy" },
 };
-export function seasonFor(turn) {
-  if (turn >= 23) return "spring";
-  if (turn === 21) return "autumn";
-  if (turn === 22) return "winter";
-  return ["spring", "summer", "autumn", "winter"][
-    Math.floor(((turn - 1) % 8) / 2)
-  ];
-}
+export const seasonFor = (turn) => calendarFor(turn).season;
 export function art(name, cls = "", alt = "") {
   return `<img class="pixel ${cls}" src="${PIXEL_ROOT}${name}.svg" alt="${alt}" ${alt ? "" : 'aria-hidden="true"'} width="48" height="48">`;
 }
